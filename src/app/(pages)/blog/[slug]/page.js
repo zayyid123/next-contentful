@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { createClient } from "contentful";
 import Image from "next/image";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
+import MainContentBlogDetail from "./_components/MainContent";
 
 const PageDetailBlog = ({ params }) => {
   const { slug } = params;
@@ -27,40 +28,32 @@ const PageDetailBlog = ({ params }) => {
   }, []);
 
   return (
-    <div>
-      <div className="w-full flex justify-center">
+    <div className="min-h-screen bg-cinchy-background-teal-50 pb-24">
+      {/* hero section */}
+      <div className="relative flex justify-center items-center mb-12 bg-white h-[450px] overflow-hidden">
         {dataDetailBlog && (
           <Image
             src={"https:" + dataDetailBlog.fields.featuredImage.fields.file.url}
-            width={
-              dataDetailBlog.fields.featuredImage.fields.file.details.image
-                .width
-            }
-            height={
-              dataDetailBlog.fields.featuredImage.fields.file.details.image
-                .height
-            }
+            width={2000}
+            height={2000}
             alt="gambar"
+            className="object-cover h-full w-screen object-center"
           />
         )}
+
+        <div className="absolute text-center max-w-[720px] px-3 z-10">
+          {dataDetailBlog && (
+            <h1 className="text-h1-desktop tablet:text-h1-mobile text-white mb-6">
+              {dataDetailBlog.fields.title}
+            </h1>
+          )}
+        </div>
+
+        <div className="absolute bg-[#00332ca9] w-screen h-full"></div>
       </div>
 
-      <div className="w-full my-3 px-10">
-        {dataDetailBlog && (
-          <h1 className="text-left font-bold text-xl">
-            {dataDetailBlog.fields.title}
-          </h1>
-        )}
-        {dataDetailBlog && (
-          <p>About {dataDetailBlog.fields.cookingTime} Minutes</p>
-        )}
-      </div>
-
-      <div className="w-full my-3 px-10">
-        {dataDetailBlog && (
-          <div>{documentToReactComponents(dataDetailBlog.fields.method)}</div>
-        )}
-      </div>
+      {/* content section */}
+      {dataDetailBlog && <MainContentBlogDetail data={dataDetailBlog} />}
     </div>
   );
 };
