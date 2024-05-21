@@ -118,7 +118,7 @@ const MainContentBlogDetail = ({ data }) => {
           </div>
         </div>
 
-        <div className="w-full max-w-[850px] text-justify -mt-8 text-cinchy-primary-neutral-900">
+        <div className="body-content w-full max-w-[850px] text-justify -mt-8 text-cinchy-primary-neutral-900">
           <>{documentToReactComponents(data.fields.method, options)}</>
         </div>
         {/* <div className="w-full min-w-[240px] hidden xl:block sticky top-24 px-4 py-2 text-white">

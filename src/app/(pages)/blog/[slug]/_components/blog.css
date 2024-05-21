@@ -1,4 +1,4 @@
-h2 {
+.body-content h2 {
     font-size: 2.25rem;
     font-weight: 600;
     line-height: 2.5rem;
@@ -6,8 +6,129 @@ h2 {
     margin-top: -4rem;
     padding-top: 6rem;
 }
-p {
+
+.body-content h3 {
+    font-size: 1.875rem;
+    font-weight: 600;
+    line-height: 2.25rem;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}
+
+.body-content h4 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 2rem;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}
+
+.body-content h5 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    line-height: 1.75rem;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}
+
+.body-content h6 {
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.5rem;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}
+
+.body-content p {
     font-size: 1rem;
     line-height: 1.5rem;
     margin-top: 20px;
+}
+
+.body-content ol li {
+    list-style-type: disc;
+    margin-left: 15px;
+}
+
+.body-content ul li {
+    list-style-type: decimal;
+    margin-left: 15px;
+}
+
+.body-content a {
+    color: #3b82f6;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 300ms;
+}
+
+.body-content a:hover {
+    color: #08c197;
+}
+
+.body-content blockquote {
+    background: #f9f9f9;
+    border-left: 10px solid #ccc;
+    margin: 1.5em 10px;
+    padding: 0.5em 10px;
+    quotes: "\201C""\201D""\2018""\2019";
+}
+
+.body-content blockquote:before {
+    color: #ccc;
+    content: open-quote;
+    font-size: 4em;
+    line-height: 0.1em;
+    margin-right: 0.25em;
+    vertical-align: -0.4em;
+}
+
+.body-content blockquote p {
+    display: inline;
+}
+
+.body-content table {
+    font-family: sans-serif;
+    color: #444;
+    border-radius: 10px;
+    width: 100%;
+    border: 1.5px solid #919191;
+}
+
+.body-content table tr th{
+    background: #08c197;
+    color: #fff;
+    font-weight: normal;
+}
+
+.body-content table, th, td {
+    padding: 8px 20px;
+    text-align: center;
+}
+
+.body-content table tr:hover {
+    background-color: #f5f5f5;
+}
+
+.body-content table tr:nth-child(even) {
+    background-color: #d8d8d8;
+}
+
+@media only screen and (max-width: 768px) {
+    .body-content h2 {
+        font-size: 1.875rem;
+        font-weight: 600;
+        line-height: 2.25rem;
+    }
+
+    .body-content h3 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        line-height: 2rem;
+    }
+
+    .body-content h4 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        line-height: 1.75rem;
+    }
 }
