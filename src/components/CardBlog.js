@@ -1,12 +1,29 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import LoaderImage from "./LoaderImage";
+import LoaderText from "./LoaderText";
 
-const CardBlog = ({ data }) => {
+const CardBlog = ({ data, isLoading = false }) => {
+  if (isLoading) {
+    return (
+      <div className="w-fit">
+        <div className="group w-full max-w-none md:max-w-md h-[600px] bg-white border border-gray-200 rounded-lg shadow cursor-pointer">
+          <div className="w-full h-3/4 overflow-hidden rounded-t-lg">
+            <LoaderImage width="w-[500px]" height="h-[500px]"/>
+          </div>
+          <div className="p-5 h-1/4 flex flex-col gap-y-3">
+            <LoaderText height="h-4" width="w-[70%]"/>
+            <LoaderText height="h-3" width="w-[50%]"/>
+          </div>
+        </div>
+      </div>
+    );
+  }
   const { title, slug, cookingTime, thumbnail } = data.fields;
 
   return (
-    <Link href={`/blog/${slug}`} className="w-fit bg-red-700">
+    <Link href={`/blog/${slug}`} className="w-fit">
       <div className="group w-full max-w-none md:max-w-md h-[600px] bg-white border border-gray-200 rounded-lg shadow cursor-pointer">
         <div className="w-full h-3/4 overflow-hidden rounded-t-lg">
           <Image
