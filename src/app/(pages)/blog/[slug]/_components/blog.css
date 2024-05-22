@@ -68,9 +68,10 @@
 .body-content blockquote {
     background: #f9f9f9;
     border-left: 10px solid #ccc;
-    margin: 1.5em 10px;
-    padding: 0.5em 10px;
+    margin: 1.5em 0;
+    padding: 0.9em 10px;
     quotes: "\201C""\201D""\2018""\2019";
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
 .body-content blockquote:before {
@@ -87,30 +88,50 @@
 }
 
 .body-content table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
     font-family: sans-serif;
-    color: #444;
-    border-radius: 10px;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
     width: 100%;
-    border: 1.5px solid #919191;
 }
 
-.body-content table tr th{
-    background: #08c197;
-    color: #fff;
-    font-weight: normal;
+.body-content tbody tr:nth-child(1) {
+    background-color: #009879;
+    color: #ffffff;
+    text-align: left;
+    text-transform: capitalize;
 }
 
-.body-content table, th, td {
-    padding: 8px 20px;
-    text-align: center;
+.body-content th,
+.body-content td {
+    padding: 12px 15px;
 }
 
-.body-content table tr:hover {
-    background-color: #f5f5f5;
+.body-content tbody tr {
+    border-bottom: 1px solid #dddddd;
 }
 
-.body-content table tr:nth-child(even) {
-    background-color: #d8d8d8;
+.body-content tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.body-content tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+}
+
+.body-content tbody tr.active-row {
+    font-weight: bold;
+    color: #009879;
+}
+
+.body-content tbody tr:nth-child(1) th:nth-child(1) {
+    border-top-left-radius: 8px;
+}
+
+.body-content tbody tr:nth-child(1) th:nth-last-child(1) {
+    border-top-right-radius: 8px;
 }
 
 @media only screen and (max-width: 768px) {

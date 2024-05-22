@@ -10,15 +10,16 @@ import "./blog.css";
 
 // third party
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-import { BLOCKS } from "@contentful/rich-text-types";
+import { BLOCKS, INLINES } from "@contentful/rich-text-types";
 import { createClient } from "contentful";
 
 // utils
 import CovertAltFormat from "@/utils/ConvertAltFormat";
+import Link from "next/link";
+import FormatDate from "@/utils/FormatDate";
 
 // Heading 2 Components
 const Heading2 = ({ children }) => {
-  console.log(children);
   return (
     <h2 id={CovertAltFormat(children[0])} className="align-center">
       {children}
@@ -36,7 +37,7 @@ const EmbedPhoto = ({ dataPhoto }) => {
         height={1000}
         alt={CovertAltFormat(dataPhoto.title)}
         title={CovertAltFormat(dataPhoto.title)}
-        className="object-cover w-[80%] md:w-[50%]"
+        className="object-cover w-[80%] md:w-[50%] rounded-lg"
       />
       <div className="w-full -mt-3 flex justify-center">
         <p>
@@ -49,10 +50,70 @@ const EmbedPhoto = ({ dataPhoto }) => {
   );
 };
 
+// Embed Blog Entry
+const EmbedBlogEntry = ({ dataBlog, target }) => {
+  return (
+    <Link
+      href={`/blog/${dataBlog.slug}`}
+      className="w-full flex justify-center"
+    >
+      <div className="group flex justify-between items-center sm:flex-row flex-col my-4 border rounded-lg border-cinchy-primary-neutral-600 bg-white shadow-lg w-full cursor-pointer">
+        {/* Image */}
+        <div className="sm:w-[30%] w-full h-[170px] overflow-hidden sm:rounded-tl-lg sm:rounded-bl-lg sm:rounded-tr-none rounded-t-lg">
+          <Image
+            src={"https:" + dataBlog.thumbnail.fields.file.url}
+            alt={CovertAltFormat(dataBlog.thumbnail.fields.title)}
+            width={1000}
+            height={1000}
+            className="h-full w-full object-cover group-hover:scale-110 ease-in-out duration-300"
+          />
+        </div>
+
+        {/* body */}
+        <div className="sm:pr-9 px-3 py-3 sm:w-[65%] w-full text-cinchy-primary-green-950 capitalize group-hover:text-cinchy-secondary-green-500 ease-in-out duration-300">
+          <h3>{dataBlog.title}</h3>
+          <p>
+            Created at:{"  "}
+            <span className="text-label-lg font-thin">
+              {FormatDate(target.sys.createdAt)}
+            </span>
+          </p>
+        </div>
+      </div>
+    </Link>
+  );
+};
+
+// Embed blog  inline entri
+const EmbedBlogInline = ({ dataBlog }) => {
+  console.log(dataBlog);
+  return (
+    <Link
+      href={`/blog/${dataBlog.slug}`}
+      className="group hover:bg-cinchy-primary-green-950 bg-cinchy-secondary-green-500 flex justify-end shadow-lg hover:shadow-xl ease-in-out duration-300 cursor-pointer"
+    >
+      <div className="w-[99%] bg-white py-2 px-2">
+        <span className="font-semibold text-cinchy-primary-green-950 group-hover:text-cinchy-secondary-green-500 ease-in-out duration-300">{dataBlog.title}</span>
+      </div>
+    </Link>
+  );
+};
+
 const options = {
   renderNode: {
     [BLOCKS.EMBEDDED_ASSET]: (node) => {
       return <EmbedPhoto dataPhoto={node.data.target.fields} />;
+    },
+    [BLOCKS.EMBEDDED_ENTRY]: (node) => {
+      return (
+        <EmbedBlogEntry
+          dataBlog={node.data.target.fields}
+          target={node.data.target}
+        />
+      );
+    },
+    [INLINES.EMBEDDED_ENTRY]: (node) => {
+      return <EmbedBlogInline dataBlog={node.data.target.fields} />;
     },
     [BLOCKS.HEADING_2]: (node, children) => <Heading2>{children}</Heading2>,
   },
