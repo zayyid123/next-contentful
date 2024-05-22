@@ -23,7 +23,7 @@ const CardBlog = ({ data, isLoading = false }) => {
   const { title, slug, cookingTime, thumbnail } = data.fields;
 
   return (
-    <Link href={`/blog/${slug}`} className="w-fit">
+    <Link href={`/blog/${slug}`} className="w-full md:w-fit">
       <div className="group w-full max-w-none md:max-w-md h-[600px] bg-white border border-gray-200 rounded-lg shadow cursor-pointer">
         <div className="w-full h-3/4 overflow-hidden rounded-t-lg">
           <Image
