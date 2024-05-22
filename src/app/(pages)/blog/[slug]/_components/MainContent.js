@@ -86,14 +86,15 @@ const EmbedBlogEntry = ({ dataBlog, target }) => {
 
 // Embed blog  inline entri
 const EmbedBlogInline = ({ dataBlog }) => {
-  console.log(dataBlog);
   return (
     <Link
       href={`/blog/${dataBlog.slug}`}
       className="group hover:bg-cinchy-primary-green-950 bg-cinchy-secondary-green-500 flex justify-end shadow-lg hover:shadow-xl ease-in-out duration-300 cursor-pointer"
     >
       <div className="w-[99%] bg-white py-2 px-2">
-        <span className="font-semibold text-cinchy-primary-green-950 group-hover:text-cinchy-secondary-green-500 ease-in-out duration-300">{dataBlog.title}</span>
+        <span className="font-semibold text-cinchy-primary-green-950 group-hover:text-cinchy-secondary-green-500 ease-in-out duration-300">
+          {dataBlog.title}
+        </span>
       </div>
     </Link>
   );
@@ -104,6 +105,13 @@ const options = {
     [BLOCKS.EMBEDDED_ASSET]: (node) => {
       return <EmbedPhoto dataPhoto={node.data.target.fields} />;
     },
+    [BLOCKS.TABLE]: (node, children) => (
+      <div className="overflow-x-scroll">
+        <table>
+          <tbody>{children}</tbody>
+        </table>
+      </div>
+    ),
     [BLOCKS.EMBEDDED_ENTRY]: (node) => {
       return (
         <EmbedBlogEntry
