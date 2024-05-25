@@ -20,10 +20,10 @@ const MainContent = () => {
   const [skip, setskip] = useState(
     convertPageToSkip(
       searchParams.get("page") ? searchParams.get("page") : 1,
-      10
+      3
     )
   );
-  const [limit, setlimit] = useState(10);
+  const [limit, setlimit] = useState(3);
   const [total, settotal] = useState(0);
   const [isLoading, setisLoading] = useState(true);
 
@@ -73,7 +73,7 @@ const MainContent = () => {
 
   const handleNextPage = async () => {
     // check is skip more than limit
-    if (skip >= limit || Math.ceil(total/ limit) === 1) {
+    if (skip > limit || Math.ceil(total/ limit) === 1) {
       alert("anda sudah berada di page terakhir");
       return null;
     }
@@ -85,7 +85,7 @@ const MainContent = () => {
     );
 
     // fetch api
-    getDataBlog(skip + 10, limit);
+    getDataBlog(skip + 3, limit);
   };
 
   const handlePrevPage = async () => {
@@ -102,7 +102,7 @@ const MainContent = () => {
     );
 
     // fetch api
-    getDataBlog(skip - 10, limit);
+    getDataBlog(skip - 3, limit);
   };
 
   const gotoPage = async (pageNumber) => {
@@ -140,7 +140,7 @@ const MainContent = () => {
           <li>
             <div
               onClick={() => {
-                if (skip < limit) {
+                if (skip < limit || Math.ceil(total/ limit) === 1) {
                   return null;
                 }
 
@@ -194,14 +194,14 @@ const MainContent = () => {
           <li>
             <div
               onClick={() => {
-                if (skip >= limit) {
+                if (skip > limit || Math.ceil(total/ limit) === 1) {
                   return null;
                 }
 
                 handleNextPage();
               }}
               className={`flex items-center justify-center px-4 h-10 leading-tight text-gray-500 ${
-                skip >= limit || Math.ceil(total/ limit) === 1
+                skip > limit || Math.ceil(total/ limit) === 1
                   ? "bg-gray-300 cursor-not-allowed"
                   : "bg-white cursor-pointer hover:bg-gray-100 hover:text-gray-700"
               } border border-gray-300 rounded-e-lg`}
