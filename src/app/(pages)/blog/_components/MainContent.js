@@ -115,7 +115,7 @@ const MainContent = () => {
   return (
     <>
       {/* content section */}
-      <div className="flex justify-center md:mx-10 mx-5">
+      <div className="flex justify-center">
         <div className="max-w-screen-2xl w-full my-10 flex justify-center items-start gap-5 flex-wrap">
           {isLoading ? (
             <>
