@@ -78,7 +78,11 @@ const MainContent = () => {
       return null;
     }
 
-    router.push(`/blog?page=${Number(searchParams.get("page")) + 1}`);
+    router.push(
+      `/blog?page=${
+        Number(searchParams.get("page") ? searchParams.get("page") : 1) + 1
+      }`
+    );
 
     // fetch api
     getDataBlog(skip + 6, limit);
@@ -91,7 +95,11 @@ const MainContent = () => {
       return null;
     }
 
-    router.push(`/blog?page=${Number(searchParams.get("page")) - 1}`);
+    router.push(
+      `/blog?page=${
+        Number(searchParams.get("page") ? searchParams.get("page") : 1) - 1
+      }`
+    );
 
     // fetch api
     getDataBlog(skip - 6, limit);
