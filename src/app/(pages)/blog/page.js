@@ -6,7 +6,7 @@ import MainContent from "./_components/MainContent";
 
 const PageListBlog = () => {
   return (
-    <div className="bg-cinchy-background-teal-50">
+    <div className="bg-cinchy-background-teal-50 h-full">
       {/* hero section */}
       <div className="relative flex justify-center items-center mb-5 bg-white h-[450px] overflow-hidden">
         <Image
@@ -31,7 +31,9 @@ const PageListBlog = () => {
         <div className="absolute bg-[#00332ca9] w-screen h-full"></div>
       </div>
 
-      <MainContent/>
+      <div className="max-w-screen-2xl w-full m-auto px-10">
+        <MainContent />
+      </div>
     </div>
   );
 };

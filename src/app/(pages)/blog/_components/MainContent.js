@@ -20,10 +20,10 @@ const MainContent = () => {
   const [skip, setskip] = useState(
     convertPageToSkip(
       searchParams.get("page") ? searchParams.get("page") : 1,
-      6
+      10
     )
   );
-  const [limit, setlimit] = useState(6);
+  const [limit, setlimit] = useState(10);
   const [total, settotal] = useState(0);
   const [isLoading, setisLoading] = useState(true);
 
@@ -73,7 +73,7 @@ const MainContent = () => {
 
   const handleNextPage = async () => {
     // check is skip more than limit
-    if (skip >= limit) {
+    if (skip >= limit || Math.ceil(total/ limit) === 1) {
       alert("anda sudah berada di page terakhir");
       return null;
     }
@@ -85,12 +85,12 @@ const MainContent = () => {
     );
 
     // fetch api
-    getDataBlog(skip + 6, limit);
+    getDataBlog(skip + 10, limit);
   };
 
   const handlePrevPage = async () => {
     // check is skip less than limit
-    if (skip < limit) {
+    if (skip < limit || Math.ceil(total/ limit) === 1) {
       alert("anda sudah berada di page paling awal");
       return null;
     }
@@ -102,7 +102,7 @@ const MainContent = () => {
     );
 
     // fetch api
-    getDataBlog(skip - 6, limit);
+    getDataBlog(skip - 10, limit);
   };
 
   const gotoPage = async (pageNumber) => {
@@ -135,7 +135,7 @@ const MainContent = () => {
 
       {/* pagination */}
       <div className="flex justify-center items-center pt-5 pb-12">
-        <ul className="flex items-center -space-x-px h-8 text-sm">
+        <ul className="flex items-center -space-x-px text-sm flex-wrap">
           {/* prev button */}
           <li>
             <div
@@ -147,7 +147,7 @@ const MainContent = () => {
                 handlePrevPage();
               }}
               className={`flex items-center justify-center px-4 h-10 ms-0 leading-tight text-gray-500 ${
-                skip < limit
+                skip < limit || Math.ceil(total/ limit) === 1
                   ? "bg-gray-300 cursor-not-allowed"
                   : "bg-white hover:bg-gray-100 hover:text-gray-700 cursor-pointer"
               } border border-e-0 border-gray-300 rounded-s-lg`}
@@ -201,7 +201,7 @@ const MainContent = () => {
                 handleNextPage();
               }}
               className={`flex items-center justify-center px-4 h-10 leading-tight text-gray-500 ${
-                skip >= limit
+                skip >= limit || Math.ceil(total/ limit) === 1
                   ? "bg-gray-300 cursor-not-allowed"
                   : "bg-white cursor-pointer hover:bg-gray-100 hover:text-gray-700"
               } border border-gray-300 rounded-e-lg`}
