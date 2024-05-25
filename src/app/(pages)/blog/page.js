@@ -1,32 +1,10 @@
-"use client";
-import React, { useEffect, useState } from "react";
-import { createClient } from "contentful";
-import CardBlog from "@/components/CardBlog";
+import React from "react";
+
+// components
 import Image from "next/image";
+import MainContent from "./_components/MainContent";
 
 const PageListBlog = () => {
-  const [dataBlog, setdataBlog] = useState([]);
-  const [isLoading, setisLoading] = useState(true);
-
-  useEffect(() => {
-    const getDataBlog = async () => {
-      setisLoading(true);
-      const client = createClient({
-        space: process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID,
-        accessToken: process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_KEY,
-      });
-
-      const res = await client.getEntries({
-        content_type: "blog",
-      });
-
-      setdataBlog(res.items);
-      setisLoading(false);
-    };
-
-    getDataBlog();
-  }, []);
-
   return (
     <div className="bg-cinchy-background-teal-50">
       {/* hero section */}
@@ -53,24 +31,7 @@ const PageListBlog = () => {
         <div className="absolute bg-[#00332ca9] w-screen h-full"></div>
       </div>
 
-      {/* content section */}
-      <div className="flex justify-center md:mx-10 mx-5">
-        <div className="max-w-screen-2xl w-full my-10 flex justify-center items-start gap-5 flex-wrap">
-          {isLoading ? (
-            <>
-              {[1,2,3,4,5,6].map((res, index) => (
-                <CardBlog key={res} isLoading={true} />
-              ))}
-            </>
-          ) : (
-            <>
-              {dataBlog.map((res, index) => (
-                <CardBlog key={res.sys.id} data={res} />
-              ))}
-            </>
-          )}
-        </div>
-      </div>
+      <MainContent/>
     </div>
   );
 };
