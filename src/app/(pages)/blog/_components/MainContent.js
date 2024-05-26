@@ -44,7 +44,11 @@ const MainContent = () => {
       setlimit(res.limit);
       setskip(res.skip);
       settotal(res.total);
-      setdataBlog(res.items);
+      if (res.items.length === 0) {
+        setdataBlog(null);
+      } else {
+        setdataBlog(res.items);
+      }
       setisLoading(false);
     };
 
@@ -67,7 +71,11 @@ const MainContent = () => {
     setlimit(res.limit);
     setskip(res.skip);
     settotal(res.total);
-    setdataBlog(res.items);
+    if (res.items.length === 0) {
+      setdataBlog(null);
+    } else {
+      setdataBlog(res.items);
+    }
     setisLoading(false);
   };
 
@@ -114,10 +122,12 @@ const MainContent = () => {
 
   return (
     <>
-      {dataBlog.length === 0 ? (
+      {dataBlog === null ? (
         <div className="pb-6 flex justify-center items-center min-h-[500px]">
           <div>
-            <h2 className="text-h2-desktop mobile:text-h2-mobile">No Content Yet!</h2>
+            <h2 className="text-h2-desktop mobile:text-h2-mobile">
+              No Content Yet!
+            </h2>
           </div>
         </div>
       ) : (

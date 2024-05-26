@@ -1,5 +1,16 @@
 import React from "react";
 
+// meta data
+export const metadata = {
+  title: "Bali Scooter Rental Tips & Advice",
+  description: "Read our latest scooter rental tips",
+  keywords: [
+    "Bali scooter rental blog",
+    "scooter rental advice",
+    "scooter rental news",
+  ],
+};
+
 // components
 import Image from "next/image";
 import MainContent from "./_components/MainContent";
